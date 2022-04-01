@@ -8,7 +8,7 @@ public class BankTransfer extends Thread{
     private final int fee;
 
     /**
-     * The Constructor of the BankTransfer class
+     * The Constructor of the BankTransfer
      * @param sourceAccount The source account
      * @param targetAccount The target account
      * @param amount How much money
