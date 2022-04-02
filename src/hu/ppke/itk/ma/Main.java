@@ -122,11 +122,22 @@ public class Main {
      */
     @SuppressWarnings("unused")
     public static void test6(BankAccount[] accounts){
-        System.out.println("Test 6: Is it normal?");
+        System.out.println("Test 6: Try send before the money could arrive");
 
-        (new BankTransfer(accounts[0], accounts[2], 3000)).start();
-        (new BankTransfer(accounts[1], accounts[2], 3000)).start();
+        BankTransfer bt1 = new BankTransfer(accounts[0], accounts[2], 3000);
+        BankTransfer bt2 = new BankTransfer(accounts[1], accounts[2], 3000);
+        bt1.start();
+        bt2.start();
         (new BankTransfer(accounts[2], accounts[3], 10000)).start();
+
+///        try {
+///            bt1.join();
+///            bt2.join();
+///        } catch (InterruptedException e) {
+///            e.printStackTrace();
+///        }
+///        System.out.println(" ~ Try again:");
+///        (new BankTransfer(accounts[2], accounts[3], 10000)).start();
     }
 
     /**
@@ -154,7 +165,7 @@ public class Main {
     /**
      * Withdrawal test
      *
-     * Thread 1: first + ATM (...)
+     * Thread 1: first, ATM (-...)
      * @param accounts Bank accounts
      * @param atm ATM
      * @param amount How much money
@@ -170,7 +181,7 @@ public class Main {
     /**
      * Deposit test
      *
-     * Thread 1: first + ATM (1.000)
+     * Thread 1: first, ATM (+1.000)
      * @param accounts Bank accounts
      * @param atm ATM
      */
@@ -185,12 +196,10 @@ public class Main {
     /**
      * Deposit and withdrawal test
      *
-     * Thread 1: second + ATM (-200)
-     * Thread 2: third + ATM (100)
-     * Thread 3: third + ATM (-200)
-     * Thread 4: fourth + ATM (100)
-     * Thread 5: fourth + ATM (-200)
-     * Thread 6: fifth + ATM (100)
+     * Thread 1: second, ATM (-200)
+     * Thread 2: third, ATM (+100)
+     * Thread 3: third, ATM (-200)
+     * Thread 4: fourth, ATM (+100)
      * @param accounts Bank accounts
      * @param atm ATM
      */
@@ -210,16 +219,16 @@ public class Main {
      * The final test
      *
      * Thread 1: first -> second (1.000)
-     * Thread 2: second + ATM-1 (2.000)
-     * Thread 3: first + ATM-2 (1.000)
+     * Thread 2: second, ATM-1 (+2.000)
+     * Thread 3: first, ATM-2 (+1.000)
      * Thread 4: first -> third (100)
      * Thread 5: first -> fourth (100)
      * Thread 6: first -> fifth (100)
      * Thread 7: fourth -> fifth (800)
-     * Thread 8: fourth + ATM-1 (2.000)
-     * Thread 9: fifth + ATM-2 (2.000)
-     * Thread 10: fifth + ATM-1 (-1.000)
-     * Thread 11: third + ATM-1 (-1.000)
+     * Thread 8: fourth, ATM-1 (+2.000)
+     * Thread 9: fifth, ATM-2 (+2.000)
+     * Thread 10: fifth, ATM-1 (-1.000)
+     * Thread 11: third, ATM-1 (-1.000)
      * Thread 12: third -> third (150)
      * @param accounts Bank accounts
      * @param atm First ATM

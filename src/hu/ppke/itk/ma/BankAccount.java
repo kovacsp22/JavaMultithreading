@@ -21,7 +21,7 @@ public class BankAccount{
      */
     public BankAccount(String accountName){
         this.accountName = accountName;
-        this.accountNumber =  this.createAccountNumber();
+        this.accountNumber = this.createAccountNumber();
         this.balance = 0;
     }
 
