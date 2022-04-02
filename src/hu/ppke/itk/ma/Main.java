@@ -60,7 +60,7 @@ public class Main {
      */
     @SuppressWarnings("unused")
     public static void test3(BankAccount[] accounts){
-        System.out.println("Test 2: Circle transaction");
+        System.out.println("Test 3: Circle transaction");
         for(int i = 0; i < accounts.length; i++){
             BankAccount source = accounts[i];
             BankAccount target = accounts[(i + 1) % accounts.length];
@@ -103,7 +103,7 @@ public class Main {
     @SuppressWarnings("unused")
     public static void test5(BankAccount[] accounts){
         System.out.println("Test 5: Alice the dealer");
-        for(int i = 1; i < accounts.length-1; i++){
+        for(int i = 1; i < accounts.length; i++){
             BankAccount source = accounts[0];
             BankAccount target = accounts[i];
             int amount = 100;
